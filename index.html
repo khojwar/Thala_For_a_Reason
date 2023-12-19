@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    .container {
+        width: 100%;
+        height: 100vh;
+        background-color: #f1f1f1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .outer {
+        width: 400px;
+        height: 400px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input {
+        /* border: 1px solid #ccc; */
+        outline: none;
+    }
+
+    .moyeHide {
+        display: none;
+    }
+
+    .moyeShow {
+        display: block;
+    }
+
+    .successHide {
+        display: none;
+    }
+
+    .successShow {
+        display: block;
+    }
+
+    .shareButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 20px;
+    }
+
+    button {
+        background-color: #2f63d4;
+        border: none;
+        border-radius: 5px;
+        padding: 3px 6px;
+        color: #fff;
+        /* font-size: 16px; */
+        cursor: pointer;
+    }
+    a {
+        text-decoration: none;
+        /* color: #fff; */
+    }
+
+    audio {
+        width: 100%;
+        margin-block: 10px;
+    }
+
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Everything happens for a reason <span style="color: rgb(151, 16, 16);">[ hint: 7 ]</span></h1>
+
+        <div class="outer">
+            <div class="inner">
+                <form action="" id="form">
+                    <input type="text" id="inputText" placeholder="Write something!!" />
+                    <input type="button" id="button" value="click">
+                </form>
+
+                <!-- for the moye -->
+                <div class="moyeHide" id="moye">
+                    <img src="./giphy.gif" alt="Computer man" style="width:100%;">
+                    <audio controls src="/Moye_Moye.mp3" >
+                        Your browser does not support the
+                        <code>audio</code> element.
+                    </audio>
+
+                    <hr>
+
+                    <div class="shareButton">
+                        <p>&copy;<a href="#">Tikaram</a></p> ||
+                        <button class="share-button facebook">
+                            <a href="#" style="color: #e9f3e9;">Share</a>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- while 7 or success -->
+                <div class="successHide" id="success">
+                    <img src="./success-gif-9.gif" alt="Computer man" style="width:100%;">
+                    <audio controls src="/ANIMAL.mp3">
+                        Your browser does not support the
+                        <code>audio</code> element.
+                    </audio>
+
+                    <hr >
+
+                    <div class="shareButton">
+                        <p>&copy;<a href="#">Tikaram</a></p> ||
+                        <button class="share-button facebook">
+                            <a href="#" style="color: #e9f3e9;">Share</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const button = document.getElementById('button');
+        let myAudio = document.getElementsByTagName('audio')[0];
+        let myAudio2 = document.getElementsByTagName('audio')[1];
+        let moye = document.getElementById("moye");
+        let inputText = document.getElementById("inputText");
+        let success = document.getElementById("success");
+
+        button.addEventListener('click', () => {
+            let inputValue = inputText.value;
+            
+            function calculateDigitSum(str) {
+                var sum = 0;
+                for (var i = 0; i < str.length; i++) {
+                    if (!isNaN(parseInt(str[i]))) {
+                        sum += parseInt(str[i]);
+                    }
+                }
+                return sum;
+            }
+
+            console.log(typeof calculateDigitSum(inputValue));
+            var isValid = inputValue.length === 7 || calculateDigitSum(inputValue) === 7;
+
+            if (isValid) {
+                document.getElementById("form").style.display = "none";
+                success.classList.remove("successHide");
+                success.classList.add("successShow");
+                myAudio2.play();
+            } else {
+                document.getElementById("form").style.display = "none";
+                moye.classList.remove("moyeHide");
+                moye.classList.add("moyeShow");
+                myAudio.play();
+            }
+        });
+    </script>
+</body>
+</html>
